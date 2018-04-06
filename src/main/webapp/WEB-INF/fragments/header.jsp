@@ -18,7 +18,7 @@
 				<sec:authorize access="isAuthenticated() and hasRole('ROLE_ADMIN')">
 					<li><a href="/admin/country">AdminCounrty</a></li>
 					<li><a href="/admin/brand">AdminBrand</a></li>
-<!-- 					<li><a href="/admin/category">AdminCounrty</a></li> -->
+					<li><a href="/admin/category">AdminCategory</a></li>
 <!-- 					<li><a href="/admin/iten">AdminCounrty</a></li> -->
 				</sec:authorize>
 			</ul>

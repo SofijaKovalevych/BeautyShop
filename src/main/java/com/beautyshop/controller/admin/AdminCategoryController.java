@@ -18,58 +18,58 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.beautyshop.entity.Brand;
-import com.beautyshop.service.BrandService;
-import com.beautyshop.validators.BrandValidator;
+import com.beautyshop.entity.Category;
+import com.beautyshop.service.CategoryService;
+import com.beautyshop.validators.CategoryValidator;
 
 @Controller
-@RequestMapping("/admin/brand")
-@SessionAttributes("brand")
-public class AdminBrandController {
+@RequestMapping("/admin/category")
+@SessionAttributes("category")
+public class AdminCategoryController {
 
 	@Autowired
-	private BrandService brandService;
+	private CategoryService categoryService;
 
-	@InitBinder("brand")
+	@InitBinder("category")
 	protected void bind(WebDataBinder binder) {
-		binder.setValidator(new BrandValidator(brandService));
+		binder.setValidator(new CategoryValidator(categoryService));
 	}
 
-	@ModelAttribute("brand")
-	public Brand getForm() {
-		return new Brand();
+	@ModelAttribute("category")
+	public Category getForm() {
+		return new Category();
 	}
 
 	@RequestMapping
 	public String show(Model model, @PageableDefault Pageable pageable) {
-		model.addAttribute("page", brandService.findPage(pageable));
-		return "admin/adminBrand";
+		model.addAttribute("page", categoryService.findPage(pageable));
+		return "admin/adminCategory";
 	}
 
 	@GetMapping("/update/{id}")
 	public String update(@PathVariable("id") Integer id, Model model, @PageableDefault Pageable pageable) {
-		model.addAttribute("brand", brandService.findByOne(id));
+		model.addAttribute("category", categoryService.findByOne(id));
 		return show(model, pageable);
 	}
 
 	@RequestMapping("/delete/{id}")
 	public String delete(@PathVariable("id") Integer id, Model model, @PageableDefault Pageable pageable) {
-		brandService.deleteBrand(id);
-		return "redirect:/admin/brand";
+		categoryService.deleteCategory(id);
+		return "redirect:/admin/category";
 	}
 
 	@PostMapping
-	public String save(@ModelAttribute("brand") @Valid Brand brand, BindingResult br, Model model,
+	public String save(@ModelAttribute("category") @Valid Category category, BindingResult br, Model model,
 			@PageableDefault Pageable pageable, SessionStatus status) {
 		if (br.hasErrors())
 			return show(model, pageable);
-		brandService.saveBrand(brand);
+		categoryService.saveCategory(category);
 		return cancel(status);
 	}
 
 	@RequestMapping("/cancel")
 	public String cancel(SessionStatus status) {
 		status.setComplete();
-		return "redirect:/admin/brand";
+		return "redirect:/admin/category";
 	}
 }

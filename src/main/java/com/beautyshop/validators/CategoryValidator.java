@@ -4,37 +4,37 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
-import com.beautyshop.entity.Brand;
-import com.beautyshop.service.BrandService;
+import com.beautyshop.entity.Category;
+import com.beautyshop.service.CategoryService;
 
 import static com.beautyshop.constants.ValidationConstants.*;
 
-public class BrandValidator implements Validator{
+public class CategoryValidator implements Validator{
 
-    private final BrandService brandService;
+    private final CategoryService categoryService;
 
-    public BrandValidator(BrandService brandService) {
-        this.brandService = brandService;
+    public CategoryValidator(CategoryService categoryService) {
+        this.categoryService = categoryService;
     }
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return Brand.class.equals(clazz);
+        return Category.class.equals(clazz);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
 
-    	Brand brand = (Brand) target;
-        Brand brandFromDbByName = brandService.findByName(brand.getName());
+    	Category category = (Category) target;
+        Category categoryFromDbByName = categoryService.findByName(category.getName());
 
         if (errors.getFieldError("name") == null) {
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "", CANT_BE_EMPTY);
         }
 
-        if (null != brandFromDbByName) {
-            if (brand.getId() != null) {
-                if (!brand.getId().equals(brandFromDbByName.getId())) {
+        if (null != categoryFromDbByName) {
+            if (category.getId() != null) {
+                if (!category.getId().equals(categoryFromDbByName.getId())) {
                     errors.rejectValue("name", "", NAME_ALREADY_EXISTS);
                 }
             } else {

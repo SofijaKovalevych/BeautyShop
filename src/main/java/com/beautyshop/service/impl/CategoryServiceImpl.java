@@ -1,6 +1,8 @@
 package com.beautyshop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.beautyshop.entity.Category;
@@ -36,6 +38,11 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public void deleteCategory(int categoryId) {
 		categoryRepository.delete(categoryId);
+	}
+
+	@Override
+	public Page<Category> findPage(Pageable pageable) {
+		return categoryRepository.findAll(pageable);
 	}
 
 }

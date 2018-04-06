@@ -15,7 +15,11 @@ public class Category extends Base{
 	@OneToMany(mappedBy = "category", cascade = CascadeType.PERSIST)
 	private List <Item> items = new ArrayList<>();
 
-	public Category(List<Item> items) {
+	public List<Item> getItems() {
+		return items;
+	}
+
+	public void setItems(List<Item> items) {
 		this.items = items;
 	}
 	

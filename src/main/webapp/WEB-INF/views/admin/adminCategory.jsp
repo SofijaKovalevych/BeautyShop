@@ -8,7 +8,7 @@
 	<div class="col-md-10 col-xs-10">
 		<div class="row">
 			<div class="col-md-12 col-xs-12">
-				<form:form class="form-horizontal" action="/admin/brand" method="POST" modelAttribute="brand">
+				<form:form class="form-horizontal" action="/admin/category" method="POST" modelAttribute="category">
 					<div class="form-group">
 						<label for="name" style="color:red;text-align:left;" class="col-sm-10 col-sm-offset-2 control-label"><form:errors path="name"/></label>
 					</div>
@@ -21,7 +21,7 @@
   					<div class="form-group">
     					<div class="col-sm-offset-2 col-sm-10">
       						<button type="submit" class="btn btn-primary">Create</button>
-      						<a href  = "/admin/brand/cancel" class="btn btn-primary" >Cancel</a>
+      						<a href  = "/admin/category/cancel" class="btn btn-primary" >Cancel</a>
     					</div>
   					</div>
 				</form:form>
@@ -32,11 +32,11 @@
 			<div class="col-md-4 col-xs-4"><h3>Update</h3></div>
 			<div class="col-md-4 col-xs-4"><h3>Delete</h3></div>
 		</div>
-			<c:forEach items="${page.content}" var="brand">
+			<c:forEach items="${page.content}" var="category">
 				<div class="row" id="itemHover">
-					<div class="col-md-4 col-xs-4">${brand.name}</div>
-					<div class="col-md-4 col-xs-4"><a class="btn btn-success" href="/admin/brand/update/${brand.id}<custom:allParams/>">Update</a></div>
-					<div class="col-md-4 col-xs-4"><a class="btn btn-danger" href="/admin/brand/delete/${brand.id}<custom:allParams/>">Delete</a></div>
+					<div class="col-md-4 col-xs-4">${category.name}</div>
+					<div class="col-md-4 col-xs-4"><a class="btn btn-success" href="/admin/category/update/${category.id}<custom:allParams/>">Update</a></div>
+					<div class="col-md-4 col-xs-4"><a class="btn btn-danger" href="/admin/category/delete/${category.id}<custom:allParams/>">Delete</a></div>
 				</div>
 			</c:forEach>
 	</div>
