@@ -35,26 +35,31 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.formLogin()
-			.usernameParameter("email")
+			http.formLogin()
+			.usernameParameter("login")
 			.passwordParameter("password")
-			.loginPage("/login")//.successHandler(new CustomAuthenticationSuccessHandler())
+			.loginPage("/login")
 			.failureUrl("/login?fail=true")
-		.and()
-			.logout()
+		.and().logout()
 			.logoutUrl("/logout")
 			.logoutSuccessUrl("/")
-			.deleteCookies("JSESSIONID", "Super_secret_cookie")
-			.invalidateHttpSession(true)
+			.deleteCookies("JSESSIONID", "Secret_cookei")
 		.and()
 			.authorizeRequests()
-			.antMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+			.antMatchers("/admin").hasRole("ADMIN")
 			.antMatchers("/admin/**").hasRole("ADMIN")
+			.antMatchers("/user").hasAnyRole("USER, ADMIN")
+			.antMatchers("/user/**").hasAnyRole("USER, ADMIN")
 			.anyRequest().permitAll()
 		.and()
 			.exceptionHandling().accessDeniedPage("/")
 		.and()
-			.sessionManagement().maximumSessions(1);
+			.sessionManagement().maximumSessions(1)
+		.and().and()
+			.rememberMe()
+			.rememberMeParameter("rememberMe")
+			.key("my super secret key")
+			.rememberMeCookieName("Secret_cookei");
 	}
 	
 	@Override

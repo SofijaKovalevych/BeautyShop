@@ -9,15 +9,9 @@
 					<h3>Register</h3>
 					<form:form method="POST" action="/register" modelAttribute="registerModel">
 						<div class="form-group">
-							<form:errors path="*" cssClass="error"/>
+							<form:errors path="*" cssClass="error" style="color:red"/>
 						</div>
 						<div class="form-group">
-							<label class="control-label">First Name</label>
-							<form:input path="firstName" cssClass="form-control" title="First Name" />
-						
-							<label class="control-label">Last Name</label>
-							<form:input path="lastName" cssClass="form-control" title="Last Name" />
-						
   							<label class="control-label">E-mail address</label>
 							<form:input path="email" cssClass="form-control" title="E-mail address" />
 											
@@ -25,7 +19,7 @@
 							<form:password path="password" cssClass="form-control" title="Password" />
 							
 							<label class="control-label">Password Confirmation</label>
-							<form:password path="passwordConfirmation" cssClass="form-control" title="Password Confirmation" />
+							<form:password path="confirmPassword" cssClass="form-control" title="Password Confirmation" />
 							
 <%-- 							<label class="control-label">Who are you?</label>
 							<form:select path="role" cssClass="form-control">

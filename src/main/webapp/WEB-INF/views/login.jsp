@@ -5,28 +5,35 @@
 		<div class="login-wrapper">
 			<div class="box">
 				<div class="content-wrap">
-					<form:form action="/login" modelAttribute="loginModel" method="POST">
-						<fieldset>
-							<legend>Login</legend>
-							
-							<div class="form-group">
-								<form:errors path="*" cssClass="error"/>
-							</div>
-							<div class="form-group">
-	  							<label class="control-label" for="focusedInput">E-mail address</label>
-								<form:input path="email" cssClass="form-control" title="E-mail address" />
-								
-								<label class="control-label" for="focusedInput">Password</label>
-								<form:password path="password" cssClass="form-control" title="Password" />
-							</div>
-														
-							<div class="form-group">
-								<span class="input-group-btn">
-									<input type="submit" class="btn btn-primary btn-block">
-								</span>
-							</div>
-						</fieldset>
-					</form:form>
+					<form:form class="form-horizontal form-maggin" action="${pageContext.request.contextPath}/login" method="POST">
+			<div class="form-group">
+				<label for="login" class="col-sm-4 control-label">Login</label>
+				<div class="col-sm-4">
+					<input class="form-control" name="login" id="login">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-sm-4 control-label">Password</label>
+				<div class="col-sm-4">
+					<input type="password" class="form-control" name="password"
+						id="user">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-4 col-sm-4">
+					<div class="checkbox">
+						<label> <input name="rememberMe" type="checkbox">
+							Remember me
+						</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-4 col-sm-4">
+					<button type="submit" class="btn btn-primary">Sign in</button>
+				</div>
+			</div>
+		</form:form>
 				</div>
 			</div>
 

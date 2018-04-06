@@ -23,9 +23,6 @@ public class Item extends Base{
 	private String imagePath;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	private User user;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
 	private Brand brand;
 
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -33,10 +30,6 @@ public class Item extends Base{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Country country;
-	
-	public Item() {
-		
-	}
 
 	public BigDecimal getPrice() {
 		return price;
@@ -60,6 +53,30 @@ public class Item extends Base{
 
 	public void setImagePath(String imagePath) {
 		this.imagePath = imagePath;
+	}
+
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Brand brand) {
+		this.brand = brand;
+	}
+
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
+	public Country getCountry() {
+		return country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
 	}
 
 }

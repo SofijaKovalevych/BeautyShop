@@ -1,6 +1,8 @@
 package com.beautyshop.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.beautyshop.entity.Brand;
@@ -38,5 +40,10 @@ public class BrandServiceImpl implements BrandService{
 	public void deleteBrand(int brandId) {
 		brandRepository.delete(brandId);
 		
+	}
+
+	@Override
+	public Page<Brand> findPage(Pageable pageable) {
+		return brandRepository.findAll(pageable);
 	}
 }

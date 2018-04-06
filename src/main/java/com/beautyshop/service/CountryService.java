@@ -1,5 +1,8 @@
 package com.beautyshop.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import com.beautyshop.entity.Country;
 
 public interface CountryService {
@@ -11,5 +14,7 @@ public interface CountryService {
 	Country findByName(String name);
 	
 	void deleteCountry(int countryId);
+
+	Page<Country> findPage(Pageable pageable);
 
 }

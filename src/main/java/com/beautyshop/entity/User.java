@@ -51,11 +51,8 @@ public class User extends Base implements UserDetails {
 	@Column(name="phone_number")
 	private String phoneNumber;
 	
-	@Enumerated(EnumType.ORDINAL)
+	@Enumerated
 	private Role role; 
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
-	private List<Item> items = new ArrayList<>();
 	
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
@@ -128,14 +125,6 @@ public class User extends Base implements UserDetails {
 
 	public void setRole(Role role) {
 		this.role = role;
-	}
-
-	public List<Item> getItems() {
-		return items;
-	}
-
-	public void setItems(List<Item> items) {
-		this.items = items;
 	}
 	
 	public byte[] getFileData() {

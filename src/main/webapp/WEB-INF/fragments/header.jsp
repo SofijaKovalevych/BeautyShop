@@ -1,53 +1,49 @@
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="sec"	uri="http://www.springframework.org/security/tags"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
 <nav class="navbar navbar-inverse">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/">Online Courses</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-      <ul class="nav navbar-nav">
-        <li><a href="/">Home<span class="sr-only">(current)</span></a></li>
-        <li><a href="/course">Courses</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right" style="width: 300px;">
-			<sec:authorize access="!isAuthenticated()">
-		            <li><a href="/login">Login</a></li>
-		            <li class="divider"></li>
-		            <li><a href="/register">Register</a></li>		
-		     </sec:authorize>
-		     
-		     <sec:authorize access="isAuthenticated()">
-		     		<sec:authentication property="principal.username" var="username"/>
-	     			<li><a href="/user">${username}</a></li>
-
-					<c:url var="logoutUrl" value="/logout" />
-					<form:form action="${logoutUrl}" method="post" cssStyle="padding-top: 7px;">
-						<li><input class="btn btn-danger" type="submit" value="Logout" /></li>
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="/">Main</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<sec:authorize access="isAuthenticated()">
+					<li><a href="/user/profile">Profile</a></li>
+				</sec:authorize>
+				<li><a href="/about">About</a></li>
+<!-- 				<li><a href="#">Projects</a></li> -->
+<!-- 				<li><a href="#">Contact</a></li> -->
+				<sec:authorize access="isAuthenticated() and hasRole('ROLE_ADMIN')">
+					<li><a href="/admin/country">AdminCounrty</a></li>
+					<li><a href="/admin/brand">AdminBrand</a></li>
+<!-- 					<li><a href="/admin/category">AdminCounrty</a></li> -->
+<!-- 					<li><a href="/admin/iten">AdminCounrty</a></li> -->
+				</sec:authorize>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<sec:authorize access="!isAuthenticated()">
+					<li><a href="/login"><span
+							class="glyphicon glyphicon-log-in"></span> Login</a></li>
+					<li><a href="/register"> Register</a></li>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+<%-- 			       <li><a href="/shopping">Корзина <span class="badge">${quantity.count}</span></a></li> --%>
+			       <li>
+					<form:form action="${pageContext.request.contextPath}/logout"
+						method="POST" id="logOutId">
+<%-- 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+						<li style="margin-top: 15px;color=red"><a href="#">Logout</a></li>
 					</form:form>
+					</li>
 			</sec:authorize>
-      </ul>
-    </div>
-  </div>
+			</ul>
+		</div>
+	</div>
+</nav>
+<script>
+document.getElementById("logOutId").onclick = function() {
+    document.getElementById("logOutId").submit();
+}
+</script>
