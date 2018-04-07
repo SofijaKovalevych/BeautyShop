@@ -51,10 +51,6 @@ public class IndexController {
 			response.addCookie(new Cookie("userId", String.valueOf(id)));
 		}
 		model.addAttribute("page", itemService.findPage(pageable));
-		Item item = itemService.findOne(1);
-		String encodeFileToBase64 = new String(Base64.encodeBase64(item.getImg()));
-			model.addAttribute("bag", encodeFileToBase64);
-		System.out.println("Image: " + encodeFileToBase64);
 		return "index";
 	}
 	

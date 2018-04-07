@@ -13,11 +13,10 @@
 	<sec:authorize access="!isAuthenticated()">
 		<h3 id="blink">To buy you need to register!!!</h3>
 	</sec:authorize>
-	<img src="data:image/jpg;base64, ${bag}" class="img-rounded" width="300"/>
 	<div class="col-md-10 col-xs-10 parent">
 		<c:forEach items="${page.content}" var="item">
 			<div  id="itemHover">
-				<img src="data:image/jpg;base64, ${item.img}" class="img-rounded" width="300"/>
+				<img src="data:image/jpg;base64, ${item.img}" class="img-rounded" width="100"/>
 				<p>Name: ${item.name}</p>
 				<p>Price: ${item.price} $</p>
 				<sec:authorize access="isAuthenticated()">

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import com.beautyshop.dto.ItemDto;
 import com.beautyshop.entity.Item;
 import com.beautyshop.form.ItemForm;
 
@@ -23,7 +24,7 @@ public interface ItemService {
 
 	void delete(int id);
 
-	Page<Item> findPage(Pageable pageable);
+	Page<ItemDto> findPage(Pageable pageable);
 
 	int findCount(int userId);
 

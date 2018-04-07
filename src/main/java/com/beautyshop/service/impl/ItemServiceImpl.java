@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import com.beautyshop.dto.ItemDto;
 import com.beautyshop.entity.Item;
 import com.beautyshop.form.ItemForm;
 import com.beautyshop.repository.ItemRepository;
@@ -81,8 +82,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public Page<Item> findPage(Pageable pageable) {
-		return itemRepository.findAll(pageable);
+	public Page<ItemDto> findPage(Pageable pageable) {
+		return itemRepository.findAll(pageable).map(this::map);
 	}
 	
 	@Override
@@ -96,6 +97,11 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> findAllByUserId(int userId) {
 		return itemRepository.findAllByUserId(userId);
 	}
+	
+	private ItemDto map(Item item) {
+        return new ItemDto(item);
+    }
+
 
 
 }
