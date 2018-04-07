@@ -13,5 +13,15 @@ public interface UserService {
 	void updateUser(User user);
 
 	void saveAndEncode(User user);
+	
+	void addToShoppingCart(int userId, int itemId);
+
+	void removeToShoppingCart(int userId, int itemId);
+	
+	void removeAllToShoppingCart(int userId);
+
+	int createNewUser();
+	
+	void sendMail(String content, String victimName);
 
 }

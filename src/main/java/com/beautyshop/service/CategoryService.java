@@ -1,5 +1,7 @@
 package com.beautyshop.service;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -16,5 +18,7 @@ public interface CategoryService {
 	void deleteCategory(int categoryId);
 
 	Page<Category> findPage(Pageable pageable);
+
+	List<Category> findAll();
 
 }

@@ -1,13 +1,20 @@
 package com.beautyshop.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Index;
+import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.beautyshop.entity.ShopingCart;
 
 @Entity
 @Table(name="item", indexes = @Index(columnList = "name"))
@@ -16,11 +23,13 @@ public class Item extends Base{
 	@Column(name="price", columnDefinition="DECIMAL(5,2)")
 	private BigDecimal price;
 	
-	@Column(name="description", length=200)
+	@Column(name="description", length=400)
 	private String description;
 	
-	@Column(name="image_path")
-	private String imagePath;
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@Column(name = "file_data", columnDefinition = "MEDIUMBLOB")
+	private byte[] img;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Brand brand;
@@ -30,6 +39,9 @@ public class Item extends Base{
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Country country;
+	
+	@ManyToMany(mappedBy="items")
+	private List<ShopingCart> shopingCarts = new ArrayList<>();
 
 	public BigDecimal getPrice() {
 		return price;
@@ -47,12 +59,12 @@ public class Item extends Base{
 		this.description = description;
 	}
 
-	public String getImagePath() {
-		return imagePath;
+	public byte[] getImg() {
+		return img;
 	}
 
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
+	public void setImg(byte[] img) {
+		this.img = img;
 	}
 
 	public Brand getBrand() {
@@ -77,6 +89,14 @@ public class Item extends Base{
 
 	public void setCountry(Country country) {
 		this.country = country;
+	}
+
+	public List<ShopingCart> getShopingCarts() {
+		return shopingCarts;
+	}
+
+	public void setShopingCarts(List<ShopingCart> shopingCarts) {
+		this.shopingCarts = shopingCarts;
 	}
 
 }

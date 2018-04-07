@@ -1,5 +1,7 @@
 package com.beautyshop.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -44,6 +46,11 @@ public class CountryServiceImpl implements CountryService{
 	@Override
 	public Page<Country> findPage(Pageable pageable) {
 		return countryRepository.findAll(pageable);
+	}
+
+	@Override
+	public List<Country> findAll() {
+		return countryRepository.findAll();
 	}
 
 }

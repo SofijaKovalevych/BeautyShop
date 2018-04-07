@@ -19,7 +19,7 @@
 					<li><a href="/admin/country">AdminCounrty</a></li>
 					<li><a href="/admin/brand">AdminBrand</a></li>
 					<li><a href="/admin/category">AdminCategory</a></li>
-<!-- 					<li><a href="/admin/iten">AdminCounrty</a></li> -->
+					<li><a href="/admin/item">AdminItem</a></li>
 				</sec:authorize>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -29,7 +29,7 @@
 					<li><a href="/register"> Register</a></li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
-<%-- 			       <li><a href="/shopping">Корзина <span class="badge">${quantity.count}</span></a></li> --%>
+			       <li><a href="/shopping">Корзина <span class="badge">${quantity.count}</span></a></li>
 			       <li>
 					<form:form action="${pageContext.request.contextPath}/logout"
 						method="POST" id="logOutId">

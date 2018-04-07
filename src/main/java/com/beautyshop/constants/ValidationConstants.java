@@ -28,4 +28,6 @@ public final class ValidationConstants {
 
     public static final String BAD_NAME = "Bad name";
 
+    public static final String BAD_PRICE = "^([0-9]{1,17}\\.[0-9]{1,2})|([0-9]{1,17}\\,[0-9]{1,2})|([0-9]{1,17})$";
+
 }

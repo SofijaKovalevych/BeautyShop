@@ -12,7 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -22,12 +26,17 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.beautyshop.enumeration.Role;
+import com.beautyshop.entity.ShopingCart;
 
 @Entity
 @Table(name="user")
-public class User extends Base implements UserDetails {
+public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 
 	@Column(name="first_name")
 	private String firstName;
@@ -59,8 +68,15 @@ public class User extends Base implements UserDetails {
 	@Column(name = "file_data", columnDefinition = "MEDIUMBLOB")
 	private byte[] fileData;
 	
-	public User() {
-		
+	@ManyToOne(fetch=FetchType.LAZY)
+	private ShopingCart shopingCart;
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public String getFirstName() {
@@ -163,6 +179,14 @@ public class User extends Base implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	public ShopingCart getShopingCart() {
+		return shopingCart;
+	}
+
+	public void setShopingCart(ShopingCart shopingCart) {
+		this.shopingCart = shopingCart;
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.beautyshop.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,5 +47,11 @@ public class BrandServiceImpl implements BrandService{
 	@Override
 	public Page<Brand> findPage(Pageable pageable) {
 		return brandRepository.findAll(pageable);
+	}
+
+
+	@Override
+	public List<Brand> findAll() {
+		return brandRepository.findAll();
 	}
 }

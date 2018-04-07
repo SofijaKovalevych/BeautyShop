@@ -39,6 +39,10 @@ public class UserValidator implements Validator{
         if (errors.getFieldError("password") == null) {
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "", CANT_BE_EMPTY);
         }
+        
+        if(userService.findUserByEmail(user.getEmail())!=null) {
+        	errors.rejectValue("email", "", BAD_EMAIL);
+        }
 
         if (!REGEMAIL.matcher(user.getEmail()).matches()) {
             errors.rejectValue("email", "", BAD_EMAIL);

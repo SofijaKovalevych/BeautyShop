@@ -1,5 +1,6 @@
 package com.beautyshop.entity;
 
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,6 +13,7 @@ public abstract class Base {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column
 	private String name; 
 
 	public Integer getId() {
@@ -60,5 +62,7 @@ public abstract class Base {
 			return false;
 		return true;
 	}
+
+	
 
 }
