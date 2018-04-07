@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -62,7 +63,7 @@ public class ItemServiceImpl implements ItemService {
 		entity.setDescription(form.getDescription());
 		entity.setPrice(new BigDecimal(form.getPrice()));
 		entity.setBrand(brandService.findByOne(form.getBrandId()));
-		entity.setCountry(countryService.findByOne(form.getCategoryId()));
+		entity.setCountry(countryService.findByOne(form.getCountryId()));
 		entity.setCategory(categoryService.findByOne(form.getCategoryId()));
 		itemRepository.save(entity);
 	}
@@ -76,8 +77,7 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public void delete(int id) {
-		// TODO Auto-generated method stub
-		
+		itemRepository.delete(id);
 	}
 
 	@Override

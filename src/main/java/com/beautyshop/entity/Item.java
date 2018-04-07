@@ -27,7 +27,7 @@ public class Item extends Base{
 	private String description;
 	
 	@Lob
-	@Basic(fetch = FetchType.LAZY)
+	@Basic(fetch = FetchType.EAGER)
 	@Column(name = "file_data", columnDefinition = "MEDIUMBLOB")
 	private byte[] img;
 	
@@ -58,7 +58,7 @@ public class Item extends Base{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	
 	public byte[] getImg() {
 		return img;
 	}

@@ -43,7 +43,7 @@ public class ItemForm {
 		this.name = item.getName();
 		this.price = item.getPrice().toString();
 		this.description = item.getDescription();
-		this.img = Base64.encodeBase64(item.getImg());
+		this.img = item.getImg();
 		this.brand = item.getBrand();
 		this.category = item.getCategory();
 		this.country = item.getCountry();

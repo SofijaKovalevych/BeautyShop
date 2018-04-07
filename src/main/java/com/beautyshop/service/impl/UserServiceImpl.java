@@ -171,11 +171,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	private String emailBody(String email) {
 		String item = "";
-		String fullPrice = "";
+		BigDecimal fullPrice = null;
 		List<Item> items = itemRepository.findAllByUserId(userRepository.findByEmail(email).getId());
 		for(Item i: items) {
 			item = item + i.getName() + "Prinse:" + i.getPrice().toString() + "\r";
-			fullPrice = fullPrice + i.getPrice().toString();
+			fullPrice = fullPrice.add(i.getPrice());
 		}
 		
 		return item + "\r" + fullPrice;
