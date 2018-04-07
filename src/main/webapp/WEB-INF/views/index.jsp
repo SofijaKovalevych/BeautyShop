@@ -1,7 +1,3 @@
-<!--  <h1>Welcome</h1> -->
-<!--       <p>ShopShop</p> -->
-<%--       <a href="${pageContext.request.contextPath}/info">Show info</a> --%>
-<!-- <hr> -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -16,9 +12,11 @@
 	<div class="col-md-10 col-xs-10 parent">
 		<c:forEach items="${page.content}" var="item">
 			<div  id="itemHover">
-				<img src="data:image/jpg;base64, ${item.img}" class="img-rounded" width="100"/>
-				<p>Name: ${item.name}</p>
-				<p>Price: ${item.price} $</p>
+				<a href="/iteminfo/${item.id}">
+					<img src="data:image/jpg;base64, ${item.img}" class="img-rounded" width="100"/>
+					<p>Name: ${item.name}</p>
+					<p>Price: ${item.price} грн</p>
+				</a>
 				<sec:authorize access="isAuthenticated()">
 					<a href="/buy/${item.id}" class="btn btn-primary">В корзину!</a>
 				</sec:authorize>

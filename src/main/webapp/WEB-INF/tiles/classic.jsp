@@ -63,8 +63,8 @@
 	<tiles:insertAttribute name="header"/>
 	
 <!-- 	<div class="container">     -->
-    	<div class="content text-center">
-    		<tiles:insertAttribute name="sidebar"/>
+<!--     	<div class="content text-center"> -->
+<%--     		<tiles:insertAttribute name="sidebar"/> --%>
     		
     		<div class="col-md-10 text-center"> 
     			<tiles:insertAttribute name="body"/>

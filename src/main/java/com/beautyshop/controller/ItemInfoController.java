@@ -1,0 +1,33 @@
+package com.beautyshop.controller;
+
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.beautyshop.entity.Item;
+import com.beautyshop.service.ItemService;
+
+@Controller
+@RequestMapping("/iteminfo/{id}")
+public class ItemInfoController {
+	
+	private ItemService itemService;
+
+	@Autowired
+	public ItemInfoController(ItemService itemService) {
+		this.itemService = itemService;
+	}
+
+
+
+	@RequestMapping
+	public String show(@PathVariable("id") int id, Model model) {
+		Item item = itemService.findOne(id);
+		model.addAttribute("item", item);
+		model.addAttribute("img", new String(Base64.encodeBase64(item.getImg())));
+		return "itemInfo";
+	}
+}
