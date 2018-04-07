@@ -1,7 +1,5 @@
 package com.beautyshop.dto;
 
-import java.math.BigDecimal;
-
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import com.beautyshop.entity.Item;

@@ -29,7 +29,6 @@ import com.beautyshop.enumeration.Role;
 import com.beautyshop.repository.ItemRepository;
 import com.beautyshop.repository.ShopingCartRepository;
 import com.beautyshop.repository.UserRepository;
-import com.beautyshop.service.ItemService;
 import com.beautyshop.service.UserService;
 
 @Service("userDetailsService")
@@ -171,7 +170,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	private String emailBody(String email) {
 		String item = "";
-		BigDecimal fullPrice = null;
+		BigDecimal fullPrice = new BigDecimal(0);
 		List<Item> items = itemRepository.findAllByUserId(userRepository.findByEmail(email).getId());
 		for(Item i: items) {
 			item = item + i.getName() + "Prinse:" + i.getPrice().toString() + "\r";

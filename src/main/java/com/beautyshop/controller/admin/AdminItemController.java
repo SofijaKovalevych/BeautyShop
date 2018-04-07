@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.beautyshop.entity.Item;
 import com.beautyshop.form.ItemForm;
 import com.beautyshop.service.BrandService;
 import com.beautyshop.service.CategoryService;
@@ -41,6 +40,7 @@ public class AdminItemController {
 	
 	private CountryService countryService;
 	
+	@Autowired
 	public AdminItemController(ItemService itemService, BrandService brandService, CategoryService categoryService,
 			CountryService countryService) {
 		this.itemService = itemService;

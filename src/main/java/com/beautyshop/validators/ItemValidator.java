@@ -10,9 +10,13 @@ import com.beautyshop.service.ItemService;
 
 import static com.beautyshop.constants.ValidationConstants.*;
 
+import java.util.regex.Pattern;
+
 public class ItemValidator implements Validator{
 
     private final ItemService itemService;
+    
+    private final static Pattern REG = Pattern.compile("^([0-9]{1,17}\\.[0-9]{1,2})|([0-9]{1,17}\\,[0-9]{1,2})|([0-9]{1,17})$");
 
     public ItemValidator(ItemService itemService) {
         this.itemService = itemService;
@@ -31,6 +35,14 @@ public class ItemValidator implements Validator{
 
         if (errors.getFieldError("name") == null) {
             ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "", CANT_BE_EMPTY);
+        }
+        
+        if(!REG.matcher(itemForm.getPrice()).matches()){
+			errors.rejectValue("price", "", "Can be separated only . or , or write only numbers");
+		}
+        
+        if(!itemForm.getFile().getContentType().contains("image")) {
+        	errors.rejectValue("file", "", "Must be omage type");
         }
 
         if (null != itemnFromDbByName) {

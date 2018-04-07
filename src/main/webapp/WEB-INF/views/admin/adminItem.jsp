@@ -30,7 +30,7 @@
 					<div class="form-group">
 						<label for="description" class="col-sm-2 control-label">Description</label>
 						<div class="col-sm-10">
-							<form:input class="form-control" path="description" />
+							<form:textarea rows="4" cols="50" maxlength="398" class="form-control" path="description" />
 						</div>
 					</div>
 					<div class="form-group">

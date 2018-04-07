@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,15 +20,15 @@ import com.beautyshop.service.ItemService;
 
 @Service
 public class ItemServiceImpl implements ItemService {
-	
+
 	private ItemRepository itemRepository;
-	
+
 	private BrandService brandService;
-	
+
 	private CategoryService categoryService;
-	
+
 	private CountryService countryService;
-	
+
 	@Autowired
 	public ItemServiceImpl(ItemRepository itemRepository, BrandService brandService, CategoryService categoryService,
 			CountryService countryService) {
@@ -42,7 +41,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public void saveItem(Item item) {
 		itemRepository.save(item);
-		
+
 	}
 
 	@Override
@@ -60,9 +59,11 @@ public class ItemServiceImpl implements ItemService {
 		Item entity = new Item();
 		entity.setId(form.getId());
 		entity.setName(form.getName());
-		entity.setImg(form.getFile().getBytes());
+		if (!form.getFile().isEmpty() && form.getFile() != null) {
+			entity.setImg(form.getFile().getBytes());
+		}
 		entity.setDescription(form.getDescription());
-		entity.setPrice(new BigDecimal(form.getPrice()));
+		entity.setPrice(new BigDecimal(form.getPrice().replace(",", ".")));
 		entity.setBrand(brandService.findByOne(form.getBrandId()));
 		entity.setCountry(countryService.findByOne(form.getCountryId()));
 		entity.setCategory(categoryService.findByOne(form.getCategoryId()));
@@ -85,11 +86,12 @@ public class ItemServiceImpl implements ItemService {
 	public Page<ItemDto> findPage(Pageable pageable) {
 		return itemRepository.findAll(pageable).map(this::map);
 	}
-	
+
 	@Override
 	public int findCount(int id) {
 		Integer count = itemRepository.findCount(id);
-		if(count==null)return 0;
+		if (count == null)
+			return 0;
 		return count;
 	}
 
@@ -97,11 +99,9 @@ public class ItemServiceImpl implements ItemService {
 	public List<Item> findAllByUserId(int userId) {
 		return itemRepository.findAllByUserId(userId);
 	}
-	
+
 	private ItemDto map(Item item) {
-        return new ItemDto(item);
-    }
-
-
+		return new ItemDto(item);
+	}
 
 }

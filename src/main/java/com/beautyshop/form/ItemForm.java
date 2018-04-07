@@ -1,7 +1,5 @@
 package com.beautyshop.form;
 
-import org.apache.tomcat.util.codec.binary.Base64;
-
 import org.springframework.web.multipart.MultipartFile;
 
 import com.beautyshop.entity.Brand;

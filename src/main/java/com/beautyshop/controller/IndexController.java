@@ -2,13 +2,11 @@ package com.beautyshop.controller;
 
 import java.math.BigDecimal;
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -96,9 +94,8 @@ public class IndexController {
 	
 	@GetMapping("/about")
 	public String about() {
-		return "base/about";
-	}
-	
+		return "about";
+	}	
 	
 	
 }

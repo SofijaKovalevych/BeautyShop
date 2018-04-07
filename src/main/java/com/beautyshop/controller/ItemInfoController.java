@@ -21,13 +21,15 @@ public class ItemInfoController {
 		this.itemService = itemService;
 	}
 
-
-
 	@RequestMapping
 	public String show(@PathVariable("id") int id, Model model) {
 		Item item = itemService.findOne(id);
 		model.addAttribute("item", item);
-		model.addAttribute("img", new String(Base64.encodeBase64(item.getImg())));
+		String img = "";
+		if(item.getImg()!=null) {
+			img = new String(Base64.encodeBase64(item.getImg()));
+		}
+		model.addAttribute("img", img);
 		return "itemInfo";
 	}
 }
