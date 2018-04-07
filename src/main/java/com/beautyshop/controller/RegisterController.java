@@ -50,6 +50,7 @@ public class RegisterController {
 		if(br.hasErrors()) {
 			return register(model);
 		}
+		userService.saveAndEncode(user);
 		status.setComplete();
 		return "redirect:/login";
 	}
