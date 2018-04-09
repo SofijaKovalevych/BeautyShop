@@ -152,12 +152,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 				new Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
 						return new PasswordAuthentication(
-								"bobotishe@gmail.com", "qwe123asd");
+								"kovalevych.test@gmail.com", "3009sonja");
 					}
 				});
 		try {
 			MimeMessage message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("bobotishe@gmail.com"));
+			message.setFrom(new InternetAddress("kovalevych.test@gmail.com"));
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(
 					email));
 			message.setSubject(content, "UTF-8");
@@ -169,16 +169,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	}
 
 	private String emailBody(String email) {
-		String item = "";
+		String item = " ";
 		BigDecimal fullPrice = new BigDecimal(0);
 		List<Item> items = itemRepository.findAllByUserId(userRepository.findByEmail(email).getId());
 		for(Item i: items) {
-			item = item + i.getName() + "Prinse:" + i.getPrice().toString() + "\r";
+			item = item + i.getName() + " Price: " + i.getPrice().toString() + " \r";
 			fullPrice = fullPrice.add(i.getPrice());
 		}
 		
-		return item + "\r" + fullPrice;
+		return item + " \r" + fullPrice;
 	}
-	
-	
 }
