@@ -8,6 +8,9 @@
 			<h3>Name: ${item.name} <sec:authorize access="isAuthenticated()">
 					<a href="/buy/${item.id}" class="btn btn-primary">В корзину!</a>
 				</sec:authorize></h3>
+			<h3>Brand: ${item.brand.name}</h3>
+			<h3>Category: ${item.category.name}</h3>
+			<h3>Producer: ${item.country.name}</h3>
 			<h3>Price: ${item.price} грн</h3>
 			<h4>Description: ${item.description}</h4>
 		</div>
