@@ -15,11 +15,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.beautyshop.entity.Item;
 import com.beautyshop.entity.User;
+import com.beautyshop.filter.ItemFilter;
+import com.beautyshop.service.BrandService;
+import com.beautyshop.service.CategoryService;
 import com.beautyshop.service.ItemService;
 import com.beautyshop.service.UserService;
 
@@ -29,26 +34,40 @@ public class IndexController {
 	private ItemService itemService;
 	
 	private UserService userService;
-
+	
+	private CategoryService categoryService;
+	
+	private BrandService brandService;
+	
 	@Autowired
-	public IndexController(ItemService itemService, UserService userService) {
+	public IndexController(ItemService itemService, UserService userService, CategoryService categoryService,
+			BrandService brandService) {
 		this.itemService = itemService;
 		this.userService = userService;
-	} 
+		this.categoryService = categoryService;
+		this.brandService = brandService;
+	}
 	
+	@ModelAttribute("filter")
+	public ItemFilter getFilter(){
+		return new ItemFilter();
+	}
+
 	@RequestMapping("/")
 	public String index() {
 		return "index";
 	}
 	
 	@GetMapping("/")
-	public String index(Model model, @CookieValue(defaultValue="0", name="userId") int id, HttpServletResponse response, @PageableDefault Pageable pageable, Principal principal) {
+	public String index(Model model, @CookieValue(defaultValue="0", name="userId") int id, HttpServletResponse response, @PageableDefault Pageable pageable, Principal principal, @ModelAttribute("filter")ItemFilter filter) {
 		if(principal!=null) {
 			User user = userService.findUserByEmail(principal.getName());
 			id = user.getId();
 			response.addCookie(new Cookie("userId", String.valueOf(id)));
 		}
-		model.addAttribute("page", itemService.findPage(pageable));
+		model.addAttribute("category", categoryService.findAll());
+		model.addAttribute("brand", brandService.findAll());
+		model.addAttribute("page", itemService.findPage(pageable, filter));
 		return "index";
 	}
 	
@@ -95,6 +114,12 @@ public class IndexController {
 	@GetMapping("/about")
 	public String about() {
 		return "about";
+	}	
+	
+	@GetMapping("/cancel")
+	public String cansel(SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
+		return "redirect:/";
 	}	
 	
 	

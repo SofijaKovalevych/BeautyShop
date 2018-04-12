@@ -11,12 +11,14 @@ import org.springframework.stereotype.Service;
 
 import com.beautyshop.dto.ItemDto;
 import com.beautyshop.entity.Item;
+import com.beautyshop.filter.ItemFilter;
 import com.beautyshop.form.ItemForm;
 import com.beautyshop.repository.ItemRepository;
 import com.beautyshop.service.BrandService;
 import com.beautyshop.service.CategoryService;
 import com.beautyshop.service.CountryService;
 import com.beautyshop.service.ItemService;
+import com.beautyshop.specification.ItemSpecification;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -83,8 +85,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public Page<ItemDto> findPage(Pageable pageable) {
-		return itemRepository.findAll(pageable).map(this::map);
+	public Page<ItemDto> findPage(Pageable pageable, ItemFilter filter) {
+		return itemRepository.findAll(new ItemSpecification(filter), pageable).map(this::map);
 	}
 
 	@Override

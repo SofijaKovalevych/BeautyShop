@@ -11,9 +11,10 @@
 	</sec:authorize>
 	<div class="col-md-10 col-xs-10 parent">
 		<c:forEach items="${page.content}" var="item">
-			<div  id="itemHover">
-				<a href="/iteminfo/${item.id}">
-					<img src="data:image/jpg;base64, ${item.img}" class="img-rounded" width="100"/>
+			<div id="itemHover">
+				<a href="/iteminfo/${item.id}"> <img
+					src="data:image/jpg;base64, ${item.img}" class="img-rounded"
+					width="100" />
 					<p>Name: ${item.name}</p>
 					<p>Price: ${item.price} грн</p>
 				</a>
@@ -40,6 +41,23 @@
 			<div class="col-md-6 col-xs-6 text-center">
 				<custom:size posibleSizes="1,2,5,10" size="${page.size}" />
 			</div>
+			<form:form class="form-inline" action="/" method="GET"
+				modelAttribute="filter">
+				<div class="row">
+					<div class="col-md-6 col-xs-6 text-center">
+						Categoryes
+						<form:checkboxes element="div" items="${category}" itemValue="id"
+							itemLabel="name" path="categoryIds" />
+					</div>
+					<div class="col-md-6 col-xs-6 text-center">
+						Brands
+						<form:checkboxes element="div" items="${brand}" itemValue="id"
+							itemLabel="name" path="brandIds" />
+					</div>
+				</div>
+				<button type="submit" class="btn btn-primary">Ok</button>
+				<a href  = "/cancel" class="btn btn-primary" >Cancel</a>
+			</form:form>
 		</div>
 	</div>
 </div>
