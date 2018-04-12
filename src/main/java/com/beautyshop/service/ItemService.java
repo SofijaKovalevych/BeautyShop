@@ -26,6 +26,8 @@ public interface ItemService {
 	void delete(int id);
 
 	Page<ItemDto> findPage(Pageable pageable, ItemFilter filter);
+	
+	Page<ItemDto> findAdminPage(Pageable pageable);
 
 	int findCount(int userId);
 

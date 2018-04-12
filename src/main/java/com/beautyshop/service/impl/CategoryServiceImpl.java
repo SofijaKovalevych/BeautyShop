@@ -12,7 +12,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.beautyshop.dto.CategoryFilter;
 import com.beautyshop.entity.Category;
 import com.beautyshop.repository.CategoryRepository;
 import com.beautyshop.service.CategoryService;
@@ -58,24 +57,6 @@ public class CategoryServiceImpl implements CategoryService{
 	@Override
 	public List<Category> findAll() {
 		return categoryRepository.findAll();
-	}
-
-	@Override
-	public Page<Category> findAllCtegoriesByName(Pageable pageable, CategoryFilter filter) {
-		
-		return categoryRepository.findAll(getSpecification(filter), pageable);
-	}
-	
-	private Specification<Category> getSpecification(CategoryFilter filter){
-		return new Specification<Category>() {
-			
-			@Override
-			public Predicate toPredicate(Root<Category> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				if(filter.getSearch().isEmpty()) return null;
-				return cb.like(root.get("name"),  "%" + filter.getSearch() + "%");
-			}
-			
-		};
 	}
 
 }

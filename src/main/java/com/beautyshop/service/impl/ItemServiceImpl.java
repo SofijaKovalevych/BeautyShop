@@ -88,6 +88,11 @@ public class ItemServiceImpl implements ItemService {
 	public Page<ItemDto> findPage(Pageable pageable, ItemFilter filter) {
 		return itemRepository.findAll(new ItemSpecification(filter), pageable).map(this::map);
 	}
+	
+	@Override
+	public Page<ItemDto> findAdminPage(Pageable pageable) {
+		return itemRepository.findAll(pageable).map(this::map);
+	}
 
 	@Override
 	public int findCount(int id) {

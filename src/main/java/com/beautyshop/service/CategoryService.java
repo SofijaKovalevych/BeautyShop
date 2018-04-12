@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import com.beautyshop.dto.CategoryFilter;
 import com.beautyshop.entity.Category;
 
 public interface CategoryService {
@@ -22,6 +21,5 @@ public interface CategoryService {
 
 	List<Category> findAll();
 	
-	Page<Category> findAllCtegoriesByName(Pageable pageable, CategoryFilter filter);
 
 }

@@ -61,7 +61,7 @@ public class AdminItemController {
 	
 	@RequestMapping
 	public String show(Model model, @PageableDefault Pageable pageable) {
-		model.addAttribute("page", itemService.findPage(pageable));
+		model.addAttribute("page", itemService.findAdminPage(pageable));
 		model.addAttribute("brands", brandService.findAll());
 		model.addAttribute("categories", categoryService.findAll());
 		model.addAttribute("countries", countryService.findAll());
