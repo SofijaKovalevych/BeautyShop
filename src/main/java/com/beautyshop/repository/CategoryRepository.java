@@ -13,7 +13,7 @@ public interface CategoryRepository extends JpaRepository<Category, Integer>, Jp
 	
 	Category findByName(String name);
 	
-	@Query("select c from Category c where c.name =: name")
+	@Query("select c from Category c where c.name =:name")
 	Category findCategoryByName(@Param("name") String name);
 	
 }
