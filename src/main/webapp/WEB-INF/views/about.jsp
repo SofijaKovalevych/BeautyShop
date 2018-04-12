@@ -17,21 +17,21 @@
 			<div class="carousel-inner" role="listbox">
 				<div class="item active">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/banner.jpg">
+						src="${pageContext.request.contextPath}/resources/img/banner.jpg" width="300">
 				</div>
 				<div class="item">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/images10.jpg">
+						src="${pageContext.request.contextPath}/resources/img/images10.jpg" width="300">
 				</div>
 				<div class="item">
 					<img
-						src="${pageContext.request.contextPath}/resources/img/images11.jpg">
+						src="${pageContext.request.contextPath}/resources/img/images11.jpg" width="300">
 				</div>
 				<div class="item">
-					<img src="${pageContext.request.contextPath}/resources/img/img.jpg">
+					<img src="${pageContext.request.contextPath}/resources/img/img.jpg" width="300">
 				</div>
 				<div class="item">
-					<img src="${pageContext.request.contextPath}/resources/img/img2.jpg">
+					<img src="${pageContext.request.contextPath}/resources/img/img2.jpg" width="300">
 				</div>
 			</div>
 			<a class="left carousel-control" href="#myCarousel" role="button"
